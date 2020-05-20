@@ -2,8 +2,10 @@
  * Created by kol on 2020/5/12.
  */
 
-function food(option){
-        option = option || {}
+(function (){
+    var elements = [];
+    function food(option){
+        option = option || {};
 
         this.color= option.color ||  'green';
         this.width = option.width || 20;
@@ -16,21 +18,44 @@ function food(option){
         // this.parent=parent;
         // this.init();
 
-}
+    }
 
-food.prototype.render = function(map){
-    var div = document.createElement('div')
-    map.appendChild(div);
+    food.prototype.render = function(map){
 
-    div.style.position = 'absolute';
-    div.style.left = this.x + 'px';
-    div.style.top = this.y + 'px';
-    div.style.width= this.width + 'px';
-    div.style.height= this.height + 'px';
-    div.style.backgroundColor = this.color;
+        remove();
 
-}
+        var div = document.createElement('div');
+        map.appendChild(div);
 
-var map= document.getElementById('map');
-var food = new food();
-food.render(map);
+        //Random food
+        this.x= tools.getRandom(0,map.offsetWidth/this.width - 1) * this.width;
+        this.y= tools.getRandom(0,map.offsetHeight/this.height - 1) * this.height;
+
+        elements.push(div);
+
+        div.style.position = 'absolute';
+        div.style.left = this.x + 'px';
+        div.style.top = this.y + 'px';
+        div.style.width= this.width + 'px';
+        div.style.height= this.height + 'px';
+        div.style.backgroundColor = this.color;
+
+    };
+
+    function remove(){
+        for(var i=elements.length -1 ; i>=0;i--)
+        {
+            elements.splice(i,1);
+        }
+    }
+
+    window.food =food;
+
+    console.log();
+}) ();
+
+
+
+// var map= document.getElementById('map');
+// var food = new food();
+// food.render(map);
