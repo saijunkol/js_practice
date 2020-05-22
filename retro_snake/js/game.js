@@ -26,46 +26,43 @@
         document.addEventListener('keydown',function (e) {
             switch(e.keyCode) {
                 case 37:
-                    that.Snake.direction = 'left';
+                    this.Snake.direction = 'left';
                     break;
                 case 38:
-                    that.Snake.direction = 'bottom';
+                    this.Snake.direction = 'bottom';
                     break;
                 case 39:
-                    that.Snake.direction = 'right';
+                    this.Snake.direction = 'right';
                     break;
                 case 40:
-                    that.Snake.direction = 'top';
+                    this.Snake.direction = 'top';
                     break;
                 }
 
-        },false)
+        }.bind(that),false)
         
     }
 
     function runSnake() {
         var timeid = setInterval(function(){
-            that.Snake.move(that.Food,that.map);
-            that.Snake.render(that.map);
+            this.Snake.move(this.Food,that.map);
+            this.Snake.render(this.map);
 
-            var maxX = that.map.offsetWidth/that.Snake.width;
-            var maxY = that.map.offsetHeight/that.Snake.height;
-            var headx= that.Snake.body[0].x;
-            var heady= that.Snake.body[0].y;
+            var maxX = this.map.offsetWidth/this.Snake.width;
+            var maxY = this.map.offsetHeight/this.Snake.height;
+            var headx= this.Snake.body[0].x;
+            var heady= this.Snake.body[0].y;
 
             if(headx < 0 || heady<0 || headx>=maxX || heady>=maxY)
             {
                 alert("Game Over");
                 clearInterval(timeid);
             }
-        },150);
+        }.bind(that),150);
 
     }
     window.Game=Game;
 })();
 
-var ele = document.getElementById('map');
 
-var game = new Game(ele);
-game.start();
 
