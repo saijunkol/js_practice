@@ -4,7 +4,7 @@
 
 (function (){
     var elements = [];
-    function food(option){
+    function Food(option){
         option = option || {};
 
         this.color= option.color ||  'green';
@@ -20,9 +20,10 @@
 
     }
 
-    food.prototype.render = function(map){
+    Food.prototype.render = function(map){
 
         remove();
+
 
         var div = document.createElement('div');
         map.appendChild(div);
@@ -45,11 +46,12 @@
     function remove(){
         for(var i=elements.length -1 ; i>=0;i--)
         {
+            elements[i].parentNode.removeChild(elements[i]);
             elements.splice(i,1);
         }
     }
 
-    window.food =food;
+    window.Food =Food;
 
     console.log();
 }) ();
@@ -57,5 +59,5 @@
 
 
 // var map= document.getElementById('map');
-// var food = new food();
+// var food = new Food();
 // food.render(map);
